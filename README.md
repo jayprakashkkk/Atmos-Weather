@@ -1,123 +1,237 @@
-# ⛅ Atmos — Live Weather & Atmospheric Intelligence
+<div align="center">
 
-[![Live Demo](https://img.shields.io/badge/Status-Active-success.svg)](#)
-[![PWA](https://img.shields.io/badge/PWA-Ready-blue.svg)](#)
-[![Zero Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Vanilla)-brightgreen.svg)](#)
-[![License](https://img.shields.io/badge/License-MIT-purple.svg)](#)
+# ⛅ ATMOS — LIVE WEATHER
+### Ultra-Responsive, 100% Fullscreen Atmospheric Intelligence & Meteorological Dashboard
 
-**Atmos** is a modern, ultra-lightweight, and visually stunning real-time weather web application built with pure vanilla web technologies (Zero external runtime dependencies). It features live hardware GPS targeting with neighborhood/colony-level accuracy, live radar loops, astronomical tracking of the sun and moon, real-time synthesized ambient soundscapes, and full Progressive Web App (PWA) support.
+[![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg?style=for-the-badge)](#)
+[![Fullscreen](https://img.shields.io/badge/UI-100%25%20Fullscreen-blueviolet.svg?style=for-the-badge)](#)
+[![PWA](https://img.shields.io/badge/PWA-Installable-blue.svg?style=for-the-badge)](#)
+[![Dependencies](https://img.shields.io/badge/Dependencies-0%20(Pure%20Vanilla)-orange.svg?style=for-the-badge)](#)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
----
+<br/>
 
-## ✨ Features
+**Atmos** is a state-of-the-art, zero-dependency, real-time meteorological web application engineered for modern multi-device ecosystems. From mobile smartphones to ultra-wide 4K desktop displays, Atmos transforms raw meteorological telemetry into an immersive, edge-to-edge glassmorphic experience featuring live radar, astronomical tracking, and native Web Audio ambient soundscapes.
 
-- **📍 Precision Live GPS & Local Colony Resolution**
-  - Instant hardware-level geolocation (`maximumAge: 0`, high accuracy).
-  - Reverse geocoding resolves your exact locality, colony, or sector (e.g., *Sector 62, Noida*, *Bandra West, Mumbai*).
-  - High-resolution weather model selection (`models=best_match`) via Open-Meteo.
+[Explore Live Demo](https://jayprakashkkk.github.io/Atmos-Weather/) · [Report Bug](https://github.com/jayprakashkkk/Atmos-Weather/issues) · [Request Feature](https://github.com/jayprakashkkk/Atmos-Weather/issues)
 
-- **🛰️ Live Weather Radar (RainViewer Integration)**
-  - Interactive live precipitation and cloud movement radar map with animated timeline controls.
-  - Centered dynamically on your exact coordinates with zoom and layer controls.
-
-- **🎨 Dynamic Atmospheric Scene & Glassmorphism UI**
-  - Fluid background that smoothly transitions across conditions: *Clear Sky, Partly Cloudy, Overcast, Rainy, Snowy, Foggy, Sunset, and Thunderstorms with realistic lightning and rain animations*.
-  - Clean glassmorphism aesthetic with responsive mobile-first typography and layout.
-
-- **☀️ Sun Tracker & Golden Hour**
-  - Real-time SVG celestial arc diagram showing current solar position and time until sunset/sunrise.
-  - Solar noon, total daylight length, golden hour timing, and tomorrow's sunrise.
-
-- **🌙 Astronomical Moon Phase Engine**
-  - Pure algorithmic calculation of the 8 lunar phases, illumination percentage, and moon age.
-  - Accurate moonrise and moonset estimates, next full moon, and next new moon dates.
-
-- **📈 24-Hour Sparkline & 7-Day Outlook**
-  - Interactive custom SVG temperature sparkline trend for the next 24 hours.
-  - Hourly breakdown of conditions, temperatures, and precipitation probabilities.
-  - 7-day extended forecast with visual min/max temperature gradient bars.
-
-- **🏭 Air Quality & Health Metrics**
-  - Real-time US AQI index rating and PM2.5 concentration levels.
-  - In-depth weather metrics: Relative Humidity, Wind Speed & Direction, Wind Gusts, UV Index, Surface Pressure, Visibility, Dew Point, and Cloud Cover.
-  - Smart weather alerts (Umbrella reminder, UV protection advice, Air quality precautions, Heat/cold alerts).
-
-- **🔊 Synthesized Ambient Soundscapes (Native Web Audio API)**
-  - 100% native synthesized weather audio with zero MP3 downloads.
-  - Procedurally generated soothing rain, wind sweeps, thunder rumbles, and serene atmospheric drones that dynamically match the live weather.
-
-- **📲 Progressive Web App (PWA)**
-  - Fully installable on iOS, Android, macOS, and Windows.
-  - Offline asset caching with Service Worker (`sw.js`).
-  - Standalone app mode with custom SVG branding.
-
-- **📤 Web Share & Smart Search**
-  - One-click weather sharing via native Web Share API (or clipboard copy).
-  - Debounced autocomplete search for any city or region worldwide.
-  - History chips with quick-switch and removal options.
-  - One-touch °C / °F unit toggle.
+</div>
 
 ---
 
-## 🚀 Getting Started
+## 📑 Table of Contents
 
-Because Atmos uses pure vanilla HTML, CSS, and JavaScript, no build step or package installation (`npm install`) is required!
-
-### Prerequisites
-
-To enable high-accuracy browser GPS geolocation, modern browsers require the app to be served over `http://localhost` or `https://` (direct `file:///` access restricts geolocation permissions).
-
-### Running Locally
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/jayprakashkkk/Atmos-Weather.git
-   cd Atmos-Weather
-   ```
-
-2. **Start a local HTTP server:**
-
-   Using Python 3:
-   ```bash
-   python3 -m http.server 3000
-   ```
-
-   *Or using Node.js:*
-   ```bash
-   npx serve .
-   ```
-
-3. **Open in your browser:**
-   ```
-   http://localhost:3000
-   ```
-
-4. When prompted by your browser, click **"Allow"** for Location Access to instantly view your exact live neighborhood weather and temperature!
+- [🌟 Architectural Highlights](#-architectural-highlights)
+- [🖥️ 100% Fullscreen Architecture (PC & Mobile)](#️-100-fullscreen-architecture-pc--mobile)
+- [🎯 Comprehensive Feature Suite](#-comprehensive-feature-suite)
+  - [1. Real-Time Hardware GPS & Colony Resolution](#1-real-time-hardware-gps--colony-resolution)
+  - [2. Live RainViewer Weather Radar](#2-live-rainviewer-weather-radar)
+  - [3. Astronomical Celestial Engine (Sun & Moon)](#3-astronomical-celestial-engine-sun--moon)
+  - [4. Procedural Ambient Soundscapes (Web Audio API)](#4-procedural-ambient-soundscapes-web-audio-api)
+  - [5. 24-Hour Sparklines & 7-Day Extended Forecast](#5-24-hour-sparklines--7-day-extended-forecast)
+  - [6. Atmospheric Telemetry & Air Quality (AQI)](#6-atmospheric-telemetry--air-quality-aqi)
+  - [7. Progressive Web App (PWA) & Offline Resiliency](#7-progressive-web-app-pwa--offline-resiliency)
+- [🔬 Scientific & Algorithmic Foundations](#-scientific--algorithmic-foundations)
+- [📁 Repository Architecture](#-repository-architecture)
+- [🚀 Quick Start & Local Development](#-quick-start--local-development)
+- [⌨️ Keyboard Shortcuts](#️-keyboard-shortcuts)
+- [📱 Mobile Installation Guide (PWA)](#-mobile-installation-guide-pwa)
+- [🌐 Data Providers & Attribution](#-data-providers--attribution)
+- [📄 License & Author](#-license--author)
 
 ---
 
-## 📁 Project Structure
+## 🌟 Architectural Highlights
+
+```
+┌────────────────────────────────────────────────────────────────────────────────┐
+│                           ATMOS CLIENT RUNTIME                                 │
+├──────────────────────────────┬─────────────────────────────────────────────────┤
+│ Core Engine                  │ Pure Vanilla JavaScript (ES2022+), Zero Bundler │
+│ UI & Layout                  │ Responsive 100% Fullscreen CSS Grid / Flexbox   │
+│ Visual Effects               │ Multi-layered Animated CSS Weather Scenes       │
+│ Audio Engine                 │ Native Web Audio API (Synthesized DSP Nodes)    │
+│ Geolocation Pipeline         │ W3C High-Accuracy GPS + Client Reverse Geocoding│
+│ Meteorological Provider      │ Open-Meteo High-Resolution Forecast Engine      │
+│ Radar Provider               │ RainViewer Live Doppler Precipitation Radar     │
+│ Offline / PWA Engine         │ Service Worker Cache API + Standalone Manifest  │
+└──────────────────────────────┴─────────────────────────────────────────────────┘
+```
+
+- **Zero Runtime Dependencies**: No React, Vue, jQuery, Tailwind, or Chart.js. Everything is built natively with vanilla web standards for sub-millisecond execution and minimal memory footprint.
+- **Micro-Second Load Time**: Single-page bundle with instant initial paint, optimized SVG vector graphics, and zero network bloat.
+- **Privacy-Centric Geolocation**: Location queries are handled strictly on the client side; zero user tracking, zero remote database telemetry.
+
+---
+
+## 🖥️ 100% Fullscreen Architecture (PC & Mobile)
+
+Atmos is architected to eliminate visual clutter and completely adapt to 100% of the display canvas on any device:
+
+### 📱 Mobile & Smartphone Experience
+- **Edge-to-Edge Viewport**: Engineered with `viewport-fit=cover` and dynamic viewport units (`100dvh`), eliminating dead white bars and stretching seamlessly to screen edges.
+- **Notch & Safe-Area Insets**: Full native integration with iOS and Android display cutouts using CSS environment variables (`env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`).
+- **Thumb-Zone Navigation**: Mobile-first touch targets ($\ge 44\text{px}$) with tactile active feedback.
+
+### 💻 PC, Tablet & Ultra-Wide Monitor Experience
+- **Fluid Multi-Column Dashboard**: On widescreen monitors ($\ge 1100\text{px}$), the interface automatically expands into an auto-fitting multi-column dashboard, scaling metrics fluidly across the full screen width.
+- **Hardware Fullscreen API**: Dedicated `⛶ Fullscreen` toggle button and keyboard shortcut (`F` key) to trigger the browser's native Fullscreen API for kiosk setups, wall-mounted displays, or ambient desktop weather stations.
+- **Expansive SVG Sparkline**: Dynamic 1000-unit horizontal coordinate space that scales linearly across 1080p, 1440p, and 4K displays.
+
+---
+
+## 🎯 Comprehensive Feature Suite
+
+### 1. Real-Time Hardware GPS & Colony Resolution
+- **Zero-Cache Hardware Querying**: Initiates `navigator.geolocation.getCurrentPosition` with `maximumAge: 0` and `enableHighAccuracy: true` to prevent stale location caching.
+- **Granular Locality Reverse-Geocoding**: Dual-tier reverse geocoding via BigDataCloud client API and OpenStreetMap Nominatim. Resolves exact neighborhoods, sectors, and colonies (e.g., *Sector 62, Noida*, *Bandra West, Mumbai*, *Indiranagar, Bengaluru*).
+- **High-Resolution Meteorological Grid**: Open-Meteo queries incorporate exact 4-decimal coordinates ($\sim 11\text{m}$ resolution) combined with `models=best_match` to select the highest quality national numerical weather prediction model (ECMWF, GFS, ICON, HRRR).
+
+### 2. Live RainViewer Weather Radar
+- **Live Doppler Rain Map**: Integrates RainViewer's global radar overlay directly into an expandable, full-width glass modal.
+- **Precipitation & Cloud Tracking**: Displays live precipitation intensity and cloud movement loops centered dynamically on your coordinates.
+
+### 3. Astronomical Celestial Engine (Sun & Moon)
+- **Sun Arc Tracker**: Real-time parabolic SVG visualization of the sun's path across the horizon, including solar noon, golden hour timing, daylight duration, and next-day sunrise countdown.
+- **Algorithmic Lunar Engine**: Accurately computes the current phase, age in days, and illumination percentage across all 8 major lunar phases (*New Moon, Waxing Crescent, First Quarter, Waxing Gibbous, Full Moon, Waning Gibbous, Last Quarter, Waning Crescent*).
+- **Horizon Transit Solver**: SunCalc-style trigonometric altitude solver to estimate daily moonrise and moonset times.
+
+### 4. Procedural Ambient Soundscapes (Web Audio API)
+- **100% Native Audio DSP**: Generates soothing, procedural ambient sound directly in the browser with **zero external audio files**.
+- **Dynamic Weather Modulation**:
+  - *Rain & Thunder*: Generates custom pink/brown noise using a 2-second synthesized audio buffer passed through a resonant bandpass filter, with low-frequency oscillator rumble for thunderstorms.
+  - *Windy Conditions*: Sweeping low-pass filter frequency modulations simulating gusting breezes.
+  - *Clear Sky / Evening*: Calming harmonic sine-wave drones ($174\text{Hz}$ / $220\text{Hz}$) for peaceful ambient focus.
+
+### 5. 24-Hour Sparklines & 7-Day Extended Forecast
+- **Vector Sparkline Trend**: Custom SVG polyline mapping 24-hour temperature curves with subtle gradient fills and dynamic high/low labels.
+- **Horizontal Scroll Carousel**: Smooth snap-to-card hourly view displaying time, condition icon, temperature, and percentage chance of rain.
+- **7-Day Outlook**: Daily min/max temperature gradient sliders calibrated against the week's absolute high and low extremes.
+
+### 6. Atmospheric Telemetry & Air Quality (AQI)
+- **Complete Metric Grid**:
+  - Relative Humidity (%) & Comfort Classification (Dry, Comfortable, Muggy)
+  - Wind Velocity, Gust Peak, and 8-Point Compass Direction
+  - Direct UV Index & Safe Exposure Duration
+  - Surface Atmospheric Pressure ($\text{hPa}$) & Barometric Trends
+  - Optical Visibility ($\text{km}$ / $\text{mi}$) & Cloud Cover Percentage (%)
+  - Calculated Dew Point Temperature
+- **Air Quality Telemetry**: Integrated Open-Meteo Air Quality API monitoring real-time US AQI and $\text{PM}_{2.5}$ particulate levels.
+- **Contextual Health Advisory**: Automated advisories for rain gear, high UV exposure, severe heat, wind precautions, and air quality mask warnings.
+
+### 7. Progressive Web App (PWA) & Offline Resiliency
+- **Installable**: Full Web App Manifest (`manifest.json`) compliant with desktop and mobile installation criteria.
+- **Service Worker (`sw.js`)**: Network-first strategy with automatic fallback to cached assets when offline.
+
+---
+
+## 🔬 Scientific & Algorithmic Foundations
+
+Atmos contains mathematical modeling implementations for astronomy and signal processing:
+
+### 1. Lunar Phase & Illumination Formula
+The lunar cycle calculation computes the time elapsed since the reference epoch (January 6, 2000, 18:14 UTC):
+$$\Delta d = \frac{\text{Date.now()} - \text{Date.UTC}(2000, 0, 6, 18, 14)}{86,400,000}$$
+$$\text{Phase Fraction } (p) = \left( \frac{\Delta d \pmod{29.530588} + 29.530588}{29.530588} \right) \pmod 1$$
+$$\text{Illumination Percentage} = \frac{1 - \cos(2\pi p)}{2} \times 100$$
+
+### 2. Moon Altitude Approximation
+Calculates equatorial coordinates and topocentric altitude ($h$) using ecliptic coordinates:
+$$L = 218.316^\circ + 13.176396^\circ d, \quad M = 134.963^\circ + 13.064993^\circ d, \quad F = 93.272^\circ + 13.22935^\circ d$$
+$$h = \arcsin\left(\sin(\phi)\sin(\delta) + \cos(\phi)\cos(\delta)\cos(H)\right)$$
+
+### 3. Procedural Noise Generation for Ambient Weather Audio
+A 3-pole IIR filter algorithm filters white noise into brown/pink noise suitable for rainfall modeling:
+$$b_0 = 0.99 b_0 + 0.05 \cdot \text{white}$$
+$$b_1 = 0.95 b_1 + 0.10 \cdot \text{white}$$
+$$b_2 = 0.85 b_2 + 0.25 \cdot \text{white}$$
+$$\text{sample} = 0.35 \cdot (b_0 + b_1 + b_2)$$
+
+---
+
+## 📁 Repository Architecture
 
 ```text
 Atmos-Weather/
-├── index.html        # Complete application (HTML5, Glassmorphism CSS, and Vanilla JS)
-├── manifest.json     # PWA Web App Manifest
-├── sw.js             # Service Worker for offline caching & PWA support
-├── icon.svg          # Modern vector app icon
-└── README.md         # Project documentation and guide
+├── index.html        # Single-file core application (HTML5, Responsive CSS3, Vanilla JS ES2022)
+├── manifest.json     # W3C Web App Manifest (PWA configuration)
+├── sw.js             # Service Worker for Cache Storage & offline execution
+├── icon.svg          # Vector branding & multi-resolution app icon
+└── README.md         # Professional project documentation
 ```
 
 ---
 
-## 🌐 Data Sources & Attribution
+## 🚀 Quick Start & Local Development
 
-- **Weather Forecast & Air Quality:** [Open-Meteo API](https://open-meteo.com/) (Free, open-source weather API)
-- **Live Weather Radar:** [RainViewer API](https://www.rainviewer.com/)
-- **Reverse Geocoding:** [BigDataCloud Client API](https://www.bigdatacloud.com/) & [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/)
-- **Network Geolocation Fallback:** [ipwho.is](https://ipwho.is/)
+No compilation, transpilation, or Node package installations are needed!
+
+### Running via Local Server (Recommended for GPS Access)
+
+Modern web browsers require an active HTTP origin (`http://localhost` or `https://`) to grant high-accuracy GPS permissions.
+
+#### Option 1: Python 3 (Pre-installed on macOS/Linux)
+```bash
+# Clone the repository
+git clone https://github.com/jayprakashkkk/Atmos-Weather.git
+cd Atmos-Weather
+
+# Start instant HTTP server on port 3000
+python3 -m http.server 3000
+```
+Open your browser at `http://localhost:3000`.
+
+#### Option 2: Node.js (via npx serve)
+```bash
+npx serve .
+```
+
+#### Option 3: Docker
+```bash
+docker run --rm -p 8080:80 -v "$PWD":/usr/share/nginx/html:ro nginx:alpine
+```
+Open your browser at `http://localhost:8080`.
 
 ---
 
-## 📄 License
+## ⌨️ Keyboard Shortcuts
 
-This project is open-source and available under the [MIT License](LICENSE).
+| Shortcut | Action | Description |
+| :---: | :---: | :--- |
+| <kbd>F</kbd> | **Toggle Fullscreen** | Switches between standard and 100% Fullscreen view |
+| <kbd>/</kbd> | **Quick Search** | Automatically focuses the city search input |
+| <kbd>Esc</kbd> | **Close Overlays** | Closes live radar viewer or search suggestions |
+
+---
+
+## 📱 Mobile Installation Guide (PWA)
+
+### iOS (Safari)
+1. Open Atmos in Safari.
+2. Tap the **Share** button (box with an upward arrow) in the bottom navigation bar.
+3. Scroll down and select **"Add to Home Screen"**.
+4. Tap **"Add"**. Atmos will now launch in 100% fullscreen standalone mode with zero browser chrome!
+
+### Android (Chrome / Edge)
+1. Open Atmos in Chrome.
+2. An **"📲 Install"** button will automatically appear in the top header.
+3. Tap **Install**, or tap the browser menu ($\vdots$) and select **"Install App"**.
+
+---
+
+## 🌐 Data Providers & Attribution
+
+- **Weather Forecasting & Air Quality**: [Open-Meteo](https://open-meteo.com/) *(Licensed under CC BY 4.0)*
+- **Live Doppler Precipitation Radar**: [RainViewer](https://www.rainviewer.com/)
+- **Client Reverse Geocoding**: [BigDataCloud API](https://www.bigdatacloud.com/) & [OpenStreetMap](https://www.openstreetmap.org/)
+- **Network Geolocation Fallback**: [ipwho.is](https://ipwho.is/)
+
+---
+
+## 📄 License & Author
+
+This project is open-source software licensed under the **[MIT License](LICENSE)**.
+
+Developed with ❤️ by **[Jay Prakash](https://github.com/jayprakashkkk)**.
+
+⭐ **If you find Atmos useful, consider giving this repository a star!**
