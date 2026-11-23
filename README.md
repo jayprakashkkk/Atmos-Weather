@@ -69,6 +69,8 @@
 Atmos is architected to eliminate visual clutter and completely adapt to 100% of the display canvas on any device:
 
 ### 📱 Mobile & Smartphone Experience
+- **Unboxed Clean Hero**: Temperature and locality float naturally on top of the dynamic weather background with subtle drop-shadows, creating an open, unboxed aesthetic matching modern mobile OS design.
+- **Clean SVG Settings Drawer**: The home screen is decluttered into a single clean SVG settings icon (no emojis), opening a native bottom sheet housing Units, GPS, Live Radar, Soundscape, Sharing, and Installation.
 - **Edge-to-Edge Viewport**: Engineered with `viewport-fit=cover` and dynamic viewport units (`100dvh`), eliminating dead white bars and stretching seamlessly to screen edges.
 - **Notch & Safe-Area Insets**: Full native integration with iOS and Android display cutouts using CSS environment variables (`env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`).
 - **Thumb-Zone Navigation**: Mobile-first touch targets ($\ge 44\text{px}$) with tactile active feedback.
@@ -198,9 +200,8 @@ Open your browser at `http://localhost:8080`.
 
 | Shortcut | Action | Description |
 | :---: | :---: | :--- |
-| <kbd>F</kbd> | **Toggle Fullscreen** | Switches between standard and 100% Fullscreen view |
 | <kbd>/</kbd> | **Quick Search** | Automatically focuses the city search input |
-| <kbd>Esc</kbd> | **Close Overlays** | Closes live radar viewer or search suggestions |
+| <kbd>Esc</kbd> | **Close Overlays** | Closes settings drawer, radar viewer, or suggestions |
 
 ---
 
