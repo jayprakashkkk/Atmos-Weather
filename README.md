@@ -25,12 +25,13 @@
 - [🖥️ 100% Fullscreen Architecture (PC & Mobile)](#️-100-fullscreen-architecture-pc--mobile)
 - [🎯 Comprehensive Feature Suite](#-comprehensive-feature-suite)
   - [1. Real-Time Hardware GPS & Colony Resolution](#1-real-time-hardware-gps--colony-resolution)
-  - [2. Live RainViewer Weather Radar](#2-live-rainviewer-weather-radar)
-  - [3. Astronomical Celestial Engine (Sun & Moon)](#3-astronomical-celestial-engine-sun--moon)
-  - [4. Procedural Ambient Soundscapes (Web Audio API)](#4-procedural-ambient-soundscapes-web-audio-api)
-  - [5. 24-Hour Sparklines & 7-Day Extended Forecast](#5-24-hour-sparklines--7-day-extended-forecast)
-  - [6. Atmospheric Telemetry & Air Quality (AQI)](#6-atmospheric-telemetry--air-quality-aqi)
-  - [7. Progressive Web App (PWA) & Offline Resiliency](#7-progressive-web-app-pwa--offline-resiliency)
+  - [2. Live Atmospheric Engine & Real-Time Weather Animations](#2-live-atmospheric-engine--real-time-weather-animations)
+  - [3. Live RainViewer Weather Radar](#3-live-rainviewer-weather-radar)
+  - [4. Astronomical Celestial Engine (Sun & Moon)](#4-astronomical-celestial-engine-sun--moon)
+  - [5. Procedural Ambient Soundscapes (Web Audio API)](#5-procedural-ambient-soundscapes-web-audio-api)
+  - [6. 24-Hour Sparklines & 7-Day Extended Forecast](#6-24-hour-sparklines--7-day-extended-forecast)
+  - [7. Atmospheric Telemetry & Air Quality (AQI)](#7-atmospheric-telemetry--air-quality-aqi)
+  - [8. Progressive Web App (PWA) & Offline Resiliency](#8-progressive-web-app-pwa--offline-resiliency)
 - [🔬 Scientific & Algorithmic Foundations](#-scientific--algorithmic-foundations)
 - [📁 Repository Architecture](#-repository-architecture)
 - [🚀 Quick Start & Local Development](#-quick-start--local-development)
@@ -86,31 +87,43 @@ Atmos is architected to eliminate visual clutter and completely adapt to 100% of
 
 ### 1. Real-Time Hardware GPS & Colony Resolution
 - **Zero-Cache Hardware Querying**: Initiates `navigator.geolocation.getCurrentPosition` with `maximumAge: 0` and `enableHighAccuracy: true` to prevent stale location caching.
-- **Granular Locality Reverse-Geocoding**: Dual-tier reverse geocoding via BigDataCloud client API and OpenStreetMap Nominatim. Resolves exact neighborhoods, sectors, and colonies (e.g., *Sector 62, Noida*, *Bandra West, Mumbai*, *Indiranagar, Bengaluru*).
+- **Granular Locality Reverse-Geocoding**: Dual-tier reverse geocoding via BigDataCloud client API and OpenStreetMap Nominatim. Resolves exact neighborhoods, sectors, and colonies (e.g., *Landran, Mohali*, *Sector 62, Noida*, *Bandra West, Mumbai*).
 - **High-Resolution Meteorological Grid**: Open-Meteo queries incorporate exact 4-decimal coordinates ($\sim 11\text{m}$ resolution) combined with `models=best_match` to select the highest quality national numerical weather prediction model (ECMWF, GFS, ICON, HRRR).
+- **Solid White Selected Location Chip**: The currently active location chip is rendered in solid white (`#ffffff`) with deep navy typography (`#132d4e`) and ambient glow shadow, creating high contrast against translucent glassy chips.
+- **Location Deletion with Auto-GPS Restoration**: Each saved location chip features an explicit remove button (`×`). If the user deletes their active/current location or deletes all saved chips, Atmos immediately re-detects and restores their live GPS location automatically (`locateLiveGps()`), preventing empty state locks.
 
-### 2. Live RainViewer Weather Radar
+### 2. Live Atmospheric Engine & Real-Time Weather Animations
+- **Real-Time Dynamic Weather Synchronization**: The atmospheric scene and animations automatically adapt to live weather telemetry:
+  - 🌧️ **Rain (Barish)**: Multi-layer falling diagonal rain streaks (`.rain-layer`) with continuous high-speed droplet cycle and deep stormy sky gradient.
+  - ❄️ **Snow (Burf)**: Multi-sized crystalline snowflakes (`.snow-layer`) drifting down with natural wind sway.
+  - 🧊 **Cold / Frost (Thand)**: Dedicated `.frost-layer` displaying ambient frost vignette around the screen perimeter, crystalline ice particle reflections, and subtle cold breath shimmer when temperatures $\le 15^\circ\text{C}$ or freezing conditions occur.
+  - ⛈️ **Thunderstorm (Toofan / Bijli)**: Rapid double-flash lightning illumination layered with pouring rain.
+  - 🌫️ **Haze & Fog (Dhund / Kohra)**: Smooth horizontal vapor drift with soft Gaussian blur filter.
+  - ☀️ **Clear Day**: Floating radiant sun with rotating solar corona rays and day sky gradient.
+  - 🌙 **Clear Night**: Midnight sky with glowing lunar disk and multi-star twinkling backdrop.
+
+### 3. Live RainViewer Weather Radar
 - **Live Doppler Rain Map**: Integrates RainViewer's global radar overlay directly into an expandable, full-width glass modal.
 - **Precipitation & Cloud Tracking**: Displays live precipitation intensity and cloud movement loops centered dynamically on your coordinates.
 
-### 3. Astronomical Celestial Engine (Sun & Moon)
+### 4. Astronomical Celestial Engine (Sun & Moon)
 - **Sun Arc Tracker**: Real-time parabolic SVG visualization of the sun's path across the horizon, including solar noon, golden hour timing, daylight duration, and next-day sunrise countdown.
 - **Algorithmic Lunar Engine**: Accurately computes the current phase, age in days, and illumination percentage across all 8 major lunar phases (*New Moon, Waxing Crescent, First Quarter, Waxing Gibbous, Full Moon, Waning Gibbous, Last Quarter, Waning Crescent*).
 - **Horizon Transit Solver**: SunCalc-style trigonometric altitude solver to estimate daily moonrise and moonset times.
 
-### 4. Procedural Ambient Soundscapes (Web Audio API)
+### 5. Procedural Ambient Soundscapes (Web Audio API)
 - **100% Native Audio DSP**: Generates soothing, procedural ambient sound directly in the browser with **zero external audio files**.
 - **Dynamic Weather Modulation**:
   - *Rain & Thunder*: Generates custom pink/brown noise using a 2-second synthesized audio buffer passed through a resonant bandpass filter, with low-frequency oscillator rumble for thunderstorms.
   - *Windy Conditions*: Sweeping low-pass filter frequency modulations simulating gusting breezes.
   - *Clear Sky / Evening*: Calming harmonic sine-wave drones ($174\text{Hz}$ / $220\text{Hz}$) for peaceful ambient focus.
 
-### 5. 24-Hour Sparklines & 7-Day Extended Forecast
+### 6. 24-Hour Sparklines & 7-Day Extended Forecast
 - **Vector Sparkline Trend**: Custom SVG polyline mapping 24-hour temperature curves with subtle gradient fills and dynamic high/low labels.
 - **Horizontal Scroll Carousel**: Smooth snap-to-card hourly view displaying time, condition icon, temperature, and percentage chance of rain.
 - **7-Day Outlook**: Daily min/max temperature gradient sliders calibrated against the week's absolute high and low extremes.
 
-### 6. Atmospheric Telemetry & Air Quality (AQI)
+### 7. Atmospheric Telemetry & Air Quality (AQI)
 - **Complete Metric Grid**:
   - Relative Humidity (%) & Comfort Classification (Dry, Comfortable, Muggy)
   - Wind Velocity, Gust Peak, and 8-Point Compass Direction
@@ -121,7 +134,7 @@ Atmos is architected to eliminate visual clutter and completely adapt to 100% of
 - **Air Quality Telemetry**: Integrated Open-Meteo Air Quality API monitoring real-time US AQI and $\text{PM}_{2.5}$ particulate levels.
 - **Contextual Health Advisory**: Automated advisories for rain gear, high UV exposure, severe heat, wind precautions, and air quality mask warnings.
 
-### 7. Progressive Web App (PWA) & Offline Resiliency
+### 8. Progressive Web App (PWA) & Offline Resiliency
 - **Installable**: Full Web App Manifest (`manifest.json`) compliant with desktop and mobile installation criteria.
 - **Service Worker (`sw.js`)**: Network-first strategy with automatic fallback to cached assets when offline.
 

@@ -86,16 +86,73 @@
   .scene:not(.cloudy):not(.rainy):not(.foggy):not(.snowy):not(.partly) .cloud{opacity:.28}
   .scene.partly .cloud{opacity:.8}.scene.night .cloud{background:rgba(190,205,235,.16)}
 
-  /* Rain, Snow, Fog, Lightning */
-  .rain-layer,.snow-layer,.fog-layer,.lightning{position:absolute;inset:0;pointer-events:none}
-  .rain-layer{display:none;opacity:.75;background-image:repeating-linear-gradient(105deg,transparent 0 18px,rgba(215,237,255,.55) 19px,transparent 20px 37px);background-size:100% 70px;animation:rainFall .48s linear infinite}
-  .snow-layer{display:none;background-image:radial-gradient(3px 3px at 20% 15%,#fff 50%,transparent 60%),radial-gradient(2px 2px at 80% 22%,#fff 50%,transparent 60%),radial-gradient(3px 3px at 55% 48%,#fff 50%,transparent 60%);background-size:180px 180px;animation:snowFall 12s linear infinite;opacity:.75}
-  .fog-layer{display:none;background:linear-gradient(180deg,transparent,rgba(235,244,248,.25),rgba(235,244,248,.08));filter:blur(20px);animation:fogMove 14s ease-in-out infinite alternate}
-  .lightning{display:none;background:#e8f5ff;opacity:0;animation:lightning 8s infinite}
-  .scene.rainy .rain-layer{display:block}.scene.snowy .snow-layer{display:block}.scene.foggy .fog-layer{display:block}.scene.thunder .rain-layer{display:block}.scene.thunder .lightning{display:block}
-  .scene.night:not(.rainy):not(.snowy):not(.foggy) .moon,.scene.night:not(.rainy):not(.snowy):not(.foggy) .stars{display:block}.scene.night .sun{display:none}
+  /* Rain, Snow, Fog, Frost (Thand), Lightning Layers */
+  .rain-layer,.snow-layer,.fog-layer,.frost-layer,.lightning{position:absolute;inset:0;pointer-events:none}
+  .rain-layer{
+    display:none;
+    opacity:.85;
+    background-image:
+      repeating-linear-gradient(103deg,transparent 0 20px,rgba(205,235,255,.55) 21px,transparent 22px 42px),
+      repeating-linear-gradient(106deg,transparent 0 32px,rgba(225,245,255,.35) 33px,transparent 34px 68px);
+    background-size:100% 85px, 100% 135px;
+    animation:rainFall .42s linear infinite;
+  }
+  .snow-layer{
+    display:none;
+    opacity:.85;
+    background-image:
+      radial-gradient(4px 4px at 15% 20%,#fff 50%,transparent 60%),
+      radial-gradient(3px 3px at 45% 65%,rgba(255,255,255,.9) 50%,transparent 60%),
+      radial-gradient(5px 5px at 75% 30%,#fff 50%,transparent 60%),
+      radial-gradient(2.5px 2.5px at 88% 80%,rgba(255,255,255,.85) 50%,transparent 60%),
+      radial-gradient(3.5px 3.5px at 30% 85%,#fff 50%,transparent 60%),
+      radial-gradient(4px 4px at 60% 15%,#fff 50%,transparent 60%);
+    background-size:200px 200px, 340px 340px;
+    animation:snowFall 8s linear infinite;
+  }
+  .frost-layer{
+    display:none;
+    background:
+      radial-gradient(ellipse at center, transparent 38%, rgba(195,235,255,.14) 72%, rgba(220,248,255,.32) 100%),
+      repeating-radial-gradient(circle at 12% 12%, rgba(255,255,255,.09) 0 2px, transparent 3px 22px),
+      repeating-radial-gradient(circle at 88% 88%, rgba(255,255,255,.09) 0 2px, transparent 3px 26px);
+    box-shadow:inset 0 0 90px rgba(175,225,255,.28);
+    animation:frostShimmer 5s ease-in-out infinite alternate;
+  }
+  .fog-layer{
+    display:none;
+    background:linear-gradient(180deg,transparent,rgba(235,244,248,.28),rgba(235,244,248,.12));
+    filter:blur(22px);
+    animation:fogMove 12s ease-in-out infinite alternate;
+  }
+  .lightning{display:none;background:#e8f5ff;opacity:0;animation:lightning 7s infinite}
+  .scene.rainy .rain-layer{display:block}
+  .scene.snowy .snow-layer{display:block}
+  .scene.cold .frost-layer{display:block}
+  .scene.foggy .fog-layer{display:block}
+  .scene.thunder .rain-layer{display:block}
+  .scene.thunder .lightning{display:block}
+  .scene.cold:not(.night):not(.sunset){filter:saturate(.92) contrast(1.04)}
+  .scene.night:not(.rainy):not(.snowy):not(.foggy) .moon,
+  .scene.night:not(.rainy):not(.snowy):not(.foggy) .stars{display:block}
+  .scene.night .sun{display:none}
 
-  @keyframes spin{to{transform:rotate(360deg)}}@keyframes sunFloat{50%{transform:translateY(12px)}}@keyframes drift{from{margin-left:0}to{margin-left:calc(100vw + 400px)}}@keyframes twinkle{from{opacity:.55}to{opacity:1}}@keyframes rainFall{to{background-position:0 70px}}@keyframes snowFall{to{background-position:90px 360px}}@keyframes fogMove{from{transform:translateX(-5%)}to{transform:translateX(5%)}}@keyframes lightning{0%,89%,92%,100%{opacity:0}90%{opacity:.75}91%{opacity:.12}93%{opacity:.55}94%{opacity:0}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes sunFloat{50%{transform:translateY(12px)}}
+  @keyframes drift{from{margin-left:0}to{margin-left:calc(100vw + 400px)}}
+  @keyframes twinkle{from{opacity:.55}to{opacity:1}}
+  @keyframes rainFall{to{background-position:0 85px, 0 135px}}
+  @keyframes snowFall{
+    0%{background-position:0 0, 0 0}
+    50%{background-position:30px 100px, -20px 170px}
+    100%{background-position:0 200px, 0 340px}
+  }
+  @keyframes fogMove{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
+  @keyframes frostShimmer{
+    0%{opacity:.65;transform:scale(1)}
+    100%{opacity:.95;transform:scale(1.01)}
+  }
+  @keyframes lightning{0%,89%,92%,100%{opacity:0}90%{opacity:.75}91%{opacity:.12}93%{opacity:.55}94%{opacity:0}}
 
   /* 100% TRUE FULLSCREEN EDGE-TO-EDGE CONTAINER (PHONE & PC) */
   .app{
@@ -254,7 +311,9 @@
     padding:8px 16px;
     font-weight:700;
     font-size:.88rem;
+    transition:background .2s, transform .15s;
   }
+  .search-box button:active{transform:scale(.95)}
   .recent-chips{
     display:flex;
     flex-wrap:wrap;
@@ -265,15 +324,65 @@
   .chip{
     display:inline-flex;
     align-items:center;
-    border:1px solid var(--glass-border);
-    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.12);
     border-radius:999px;
-    font-size:.85rem;
+    font-size:.88rem;
     overflow:hidden;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    transition:all .22s ease;
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
   }
-  .chip button{border:0;background:none;padding:5px 6px 5px 13px}
-  .chip .chip-x{padding:5px 10px 5px 4px;opacity:.65}
-  .chip.active{background:#fff;color:#1c3e6b;font-weight:700}
+  .chip button.chip-name-btn{
+    border:0;
+    background:none;
+    padding:6px 6px 6px 14px;
+    color:inherit;
+    font-weight:inherit;
+    font-size:inherit;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+  }
+  .chip-remove-btn{
+    border:0;
+    background:none;
+    padding:6px 12px 6px 4px;
+    color:inherit;
+    opacity:.65;
+    font-size:1.15rem;
+    line-height:1;
+    cursor:pointer;
+    transition:opacity .2s, transform .2s, color .2s;
+    display:grid;
+    place-items:center;
+  }
+  .chip-remove-btn:hover{
+    opacity:1;
+    transform:scale(1.25);
+  }
+  /* Active Chip: PURE SOLID WHITE HIGHLIGHT AS REQUESTED! */
+  .chip.active{
+    background:#ffffff !important;
+    color:#132d4e !important;
+    font-weight:750 !important;
+    border-color:#ffffff !important;
+    box-shadow:0 4px 18px rgba(255,255,255,.45), 0 2px 8px rgba(0,0,0,.18) !important;
+  }
+  .chip.active .chip-name-btn{
+    color:#132d4e !important;
+    font-weight:750 !important;
+  }
+  .chip.active .chip-remove-btn{
+    color:#132d4e !important;
+    opacity:.75;
+  }
+  .chip.active .chip-remove-btn:hover{
+    opacity:1;
+    color:#d32f2f !important;
+  }
 
   /* Weather Tips Alert Card */
   .tips-card{
@@ -624,6 +733,7 @@
   <div class="rain-layer"></div>
   <div class="snow-layer"></div>
   <div class="fog-layer"></div>
+  <div class="frost-layer"></div>
   <div class="lightning"></div>
 </div>
 
@@ -859,9 +969,20 @@
     toast: $("toast")
   };
 
-  let weatherData = null, airData = null, currentPlace = null;
+  let weatherData = null, airData = null, currentPlace = null, liveGpsPlace = null;
   let useFahrenheit = false, requestToken = 0, recentList = [];
   let deferredInstallPrompt = null;
+
+  function sameLocation(a, b) {
+    if (!a || !b) return false;
+    if (a.latitude !== undefined && b.latitude !== undefined) {
+      const latDiff = Math.abs(Number(a.latitude) - Number(b.latitude));
+      const lonDiff = Math.abs(Number(a.longitude) - Number(b.longitude));
+      if (latDiff < 0.04 && lonDiff < 0.04) return true;
+    }
+    const clean = s => String(s || "").trim().toLowerCase();
+    return clean(a.name) === clean(b.name);
+  }
 
   // Weather code labels and icons
   const weatherInfo = (code, isDay = true) => {
@@ -895,10 +1016,18 @@
     setTimeout(() => els.toast.classList.remove("show"), 3200);
   }
 
-  function setScene(info, isDay, nearSun) {
+  function setScene(info, isDay, nearSun, curTempC, c) {
     const cls = ["scene"];
     if (info.type === "thunder") cls.push("rainy", "thunder");
     else if (info.type !== "clear") cls.push(info.type);
+
+    // Dynamic Cold / Thand condition
+    const isCold = (curTempC !== null && curTempC !== undefined && Number(curTempC) <= 15) || 
+                   (c && c.apparent_temperature !== undefined && Number(c.apparent_temperature) <= 15) ||
+                   info.type === "snowy" || 
+                   [56, 57, 66, 67, 71, 73, 75, 77, 85, 86].includes(c?.weather_code);
+    if (isCold) cls.push("cold");
+
     if (!isDay) cls.push("night");
     else if (nearSun && ["clear", "partly"].includes(info.type)) cls.push("sunset");
     els.scene.className = cls.join(" ");
@@ -1008,7 +1137,7 @@
     // Scene Background
     const nowT = new Date(c.time).getTime();
     const nearSun = [daily.sunrise[0], daily.sunset[0]].some(t => Math.abs(new Date(t).getTime() - nowT) < 45 * 60000);
-    setScene(info, Number(c.is_day) === 1, nearSun);
+    setScene(info, Number(c.is_day) === 1, nearSun, c.temperature_2m, c);
 
     // Render Subsections
     renderTips(c, weatherData.hourly, daily);
@@ -1197,6 +1326,7 @@
 
   // --- Live GPS Hardware Locator ---
   function locateLiveGps() {
+    showToast("Detecting live location… 📍");
     if (!("geolocation" in navigator)) {
       fallbackLocation();
       return;
@@ -1210,8 +1340,10 @@
           country: geo.country,
           latitude: pos.coords.latitude,
           longitude: pos.coords.longitude,
-          accuracy: pos.coords.accuracy
+          accuracy: pos.coords.accuracy,
+          isGps: true
         };
+        liveGpsPlace = place;
         fetchWeather(place, ++requestToken);
       },
       () => fallbackLocation(),
@@ -1221,13 +1353,16 @@
 
   async function fallbackLocation() {
     // Landran, Mohali coordinates (30.6917° N, 76.6660° E)
-    const LANDRAN = { name: "Landran", admin1: "Punjab", country: "India", latitude: 30.6917, longitude: 76.6660, timezone: "Asia/Kolkata" };
+    const LANDRAN = { name: "Landran", admin1: "Punjab", country: "India", latitude: 30.6917, longitude: 76.6660, timezone: "Asia/Kolkata", isGps: true };
+    liveGpsPlace = LANDRAN;
     try {
       const res = await fetch("https://ipwho.is/");
       const j = await res.json();
       if (j.success !== false && j.latitude) {
         const geo = await reverseGeocode(j.latitude, j.longitude);
-        return fetchWeather({ name: geo.name || "Landran", admin1: j.region, country: j.country, latitude: j.latitude, longitude: j.longitude }, ++requestToken);
+        const p = { name: geo.name || "Landran", admin1: j.region, country: j.country, latitude: j.latitude, longitude: j.longitude, isGps: true };
+        liveGpsPlace = p;
+        return fetchWeather(p, ++requestToken);
       }
     } catch (_) {}
     fetchWeather(LANDRAN, ++requestToken);
@@ -1376,24 +1511,87 @@
     }
   });
 
+  function saveRecent() {
+    try {
+      localStorage.setItem("atmos_recent_places_v2", JSON.stringify(recentList));
+    } catch (_) {}
+  }
+
+  function loadSavedRecent() {
+    try {
+      const saved = localStorage.getItem("atmos_recent_places_v2");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length) return parsed;
+      }
+    } catch (_) {}
+    return [];
+  }
+
   function addRecent(place) {
-    if (!recentList.some(p => p.name === place.name)) {
+    if (!place || !place.name) return;
+    const existingIdx = recentList.findIndex(p => sameLocation(p, place));
+    if (existingIdx !== -1) {
+      const [existing] = recentList.splice(existingIdx, 1);
+      recentList.unshift({ ...existing, ...place });
+    } else {
       recentList.unshift(place);
-      if (recentList.length > 5) recentList.pop();
-      renderRecent();
     }
+    if (recentList.length > 6) recentList.pop();
+    saveRecent();
+    renderRecent();
   }
 
   function renderRecent() {
-    els.recentChips.innerHTML = recentList.map((p, i) => `
-      <span class="chip${p.name === currentPlace?.name ? " active" : ""}">
-        <button type="button" onclick="loadRecent(${i})">${p.name}</button>
-      </span>
-    `).join("");
+    if (!els.recentChips) return;
+    if (!recentList.length) {
+      els.recentChips.innerHTML = "";
+      return;
+    }
+    els.recentChips.innerHTML = recentList.map((p, i) => {
+      const isActive = currentPlace && sameLocation(p, currentPlace);
+      const isGps = p.isGps || p.gps || (liveGpsPlace && sameLocation(p, liveGpsPlace));
+      return `
+        <span class="chip${isActive ? " active" : ""}">
+          <button type="button" class="chip-name-btn" onclick="selectCity(${i})" aria-label="Select ${safe(p.name)}">
+            ${isGps ? "📍 " : ""}${safe(p.name)}
+          </button>
+          <button type="button" class="chip-remove-btn" onclick="removeCity(${i}, event)" aria-label="Remove ${safe(p.name)}" title="Remove location">×</button>
+        </span>
+      `;
+    }).join("");
   }
-  window.loadRecent = i => {
+
+  window.selectCity = i => {
     const p = recentList[i];
     if (p) fetchWeather(p, ++requestToken);
+  };
+  window.loadRecent = window.selectCity;
+
+  window.removeCity = (index, ev) => {
+    if (ev) {
+      ev.stopPropagation();
+      ev.preventDefault();
+    }
+    const removed = recentList[index];
+    if (!removed) return;
+
+    // Check if the removed place was current active place or live GPS location
+    const wasCurrent = currentPlace && sameLocation(removed, currentPlace);
+    const wasLiveGps = liveGpsPlace && sameLocation(removed, liveGpsPlace);
+    const isGpsTagged = Boolean(removed.isGps || removed.gps);
+
+    recentList.splice(index, 1);
+    saveRecent();
+
+    // "or pr abhi jaha hai wo location delete hoga to wo apne aap wapas aana chahiye"
+    if (wasCurrent || wasLiveGps || isGpsTagged || recentList.length === 0) {
+      showToast(`📍 Current location removed · Restoring live GPS…`);
+      locateLiveGps();
+    } else {
+      showToast(`Removed "${removed.name}"`);
+      renderRecent();
+    }
   };
 
   // Keyboard shortcut Esc
@@ -1405,6 +1603,8 @@
   });
 
   // Initialize
+  recentList = loadSavedRecent();
+  renderRecent();
   locateLiveGps();
 })();
 </script>
