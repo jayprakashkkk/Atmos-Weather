@@ -1,0 +1,18 @@
+{
+  "name": "Atmos — Live Weather",
+  "short_name": "Atmos",
+  "description": "Real-time live weather, live radar, astronomical sun & moon tracker, and ambient soundscapes.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#182c58",
+  "theme_color": "#2477c6",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
