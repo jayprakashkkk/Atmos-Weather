@@ -97,15 +97,28 @@
 
   @keyframes spin{to{transform:rotate(360deg)}}@keyframes sunFloat{50%{transform:translateY(12px)}}@keyframes drift{from{margin-left:0}to{margin-left:calc(100vw + 400px)}}@keyframes twinkle{from{opacity:.55}to{opacity:1}}@keyframes rainFall{to{background-position:0 70px}}@keyframes snowFall{to{background-position:90px 360px}}@keyframes fogMove{from{transform:translateX(-5%)}to{transform:translateX(5%)}}@keyframes lightning{0%,89%,92%,100%{opacity:0}90%{opacity:.75}91%{opacity:.12}93%{opacity:.55}94%{opacity:0}}
 
-  /* App Container: 100% Fullscreen Responsive on Phone & PC */
+  /* 100% TRUE FULLSCREEN EDGE-TO-EDGE CONTAINER (PHONE & PC) */
   .app{
     width:100%;
-    max-width:1100px;
-    margin:0 auto;
-    padding:clamp(12px,2.5vw,26px) clamp(14px,3vw,36px) 56px;
+    max-width:100%;
+    margin:0;
+    padding:clamp(12px,2vw,24px) clamp(14px,3.2vw,56px) 60px;
     display:flex;
     flex-direction:column;
-    gap:18px;
+    gap:20px;
+  }
+
+  /* Browser Fullscreen API Styling */
+  :fullscreen {
+    overflow-y:auto;
+    background:#162544;
+  }
+  :-webkit-full-screen {
+    overflow-y:auto;
+    background:#162544;
+  }
+  :fullscreen .app, :-webkit-full-screen .app {
+    padding:clamp(16px,2.5vw,32px) clamp(16px,4vw,60px) 64px;
   }
 
   /* Top Navigation Bar: Location on left, SVG Settings Gear on right */
@@ -736,6 +749,15 @@
       </div>
     </div>
 
+    <!-- 100% Fullscreen Toggle -->
+    <button class="settings-action-item" id="fsDrawerBtn">
+      <div class="settings-icon">⛶</div>
+      <div class="settings-row-text">
+        <strong id="fsDrawerLabel">100% Fullscreen View</strong>
+        <small>Toggle browser window fullscreen (Press F)</small>
+      </div>
+    </button>
+
     <!-- Detect Live GPS -->
     <button class="settings-action-item" id="locateBtn">
       <div class="settings-icon">📍</div>
@@ -818,6 +840,8 @@
     settingsDrawer: $("settingsDrawer"),
     settingsBackdrop: $("settingsBackdrop"),
     closeSettingsBtn: $("closeSettingsBtn"),
+    fsDrawerBtn: $("fsDrawerBtn"),
+    fsDrawerLabel: $("fsDrawerLabel"),
     celsiusBtn: $("celsiusBtn"),
     fahrBtn: $("fahrBtn"),
     locateBtn: $("locateBtn"),
@@ -1221,6 +1245,42 @@
   els.settingsBtn.addEventListener("click", openSettings);
   els.closeSettingsBtn.addEventListener("click", closeSettings);
   els.settingsBackdrop.addEventListener("click", closeSettings);
+
+  // --- 100% Fullscreen Mode Logic ---
+  function toggleFullscreen() {
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      const el = document.documentElement;
+      if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    } else {
+      if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+  }
+
+  function updateFsState() {
+    const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    if (els.fsDrawerLabel) {
+      els.fsDrawerLabel.textContent = isFs ? "Exit Fullscreen View" : "100% Fullscreen View";
+    }
+    showToast(isFs ? "100% Fullscreen View Enabled ⛶" : "Exited Fullscreen View 🗗");
+  }
+
+  if (els.fsDrawerBtn) {
+    els.fsDrawerBtn.addEventListener("click", () => {
+      closeSettings();
+      toggleFullscreen();
+    });
+  }
+  document.addEventListener("fullscreenchange", updateFsState);
+  document.addEventListener("webkitfullscreenchange", updateFsState);
+
+  window.addEventListener("keydown", e => {
+    if ((e.key === "f" || e.key === "F") && !["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) {
+      e.preventDefault();
+      toggleFullscreen();
+    }
+  });
 
   // --- Units Toggle (°C / °F) ---
   els.celsiusBtn.addEventListener("click", () => {
